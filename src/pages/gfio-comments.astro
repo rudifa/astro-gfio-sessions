@@ -10,6 +10,20 @@ const sometextarray = [
   'Another piece of arbitrary text for the div.',
   'The final piece of arbitrary text, distinct from the rest.',
 ];
+
+import { fetchGfioComments } from '../util/fetchgfiocomments.js';
+
+let commentsData;
+
+// Define an async function to fetch the comments data
+async function getCommentsData() {
+  commentsData = await fetchGfioComments();
+  // console.log('commentsData 1', commentsData);
+}
+
+// Call the function
+await getCommentsData();
+console.log('commentsData 2', commentsData);
 ---
 
 <ShoelaceLayout title='‹new-astro-repo› › WebApp'>
@@ -57,6 +71,8 @@ const sometextarray = [
     <p>{sometext}</p>
 
     <p>{sometextarray.map((text) => <p>{text}</p>)}</p>
+
+    {commentsData.map((comment) => <p>{JSON.stringify(comment)}</p>)}
   </div>
 </ShoelaceLayout>
 
