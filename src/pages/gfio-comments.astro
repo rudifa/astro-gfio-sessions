@@ -1,29 +1,26 @@
 ---
 import ShoelaceLayout from '../layouts/ShoelaceLayout.astro';
 
-const sometext = 'This is some more arbitrary text to be displayed in the div.';
+import {
+  fetchAllIssuesWithComments,
+  getGithubAccessToken,
+} from '../util/fetchgfiocomments.js';
 
-const sometextarray = [
-  'This is the first arbitrary text to be displayed in the div.',
-  'Here is some more arbitrary text, different from the first.',
-  'This arbitrary text is unique and interesting.',
-  'Another piece of arbitrary text for the div.',
-  'The final piece of arbitrary text, distinct from the rest.',
-];
-
-import { fetchGfioComments } from '../util/fetchgfiocomments.js';
+const owner = 'gongfudev';
+const repo = 'sessions';
+const token = getGithubAccessToken();
 
 let commentsData;
 
 // Define an async function to fetch the comments data
-async function getCommentsData() {
-  commentsData = await fetchGfioComments();
+async function fetchComments() {
+  commentsData = await fetchAllIssuesWithComments(owner, token, repo);
   // console.log('commentsData 1', commentsData);
 }
 
 // Call the function
-await getCommentsData();
-console.log('commentsData 2', commentsData);
+await fetchComments();
+console.log('loaded commentsData.length=', commentsData.length);
 ---
 
 <ShoelaceLayout title='‹new-astro-repo› › WebApp'>
@@ -66,11 +63,11 @@ console.log('commentsData 2', commentsData);
     </sl-alert>
   </div>
   <div class='gfio-comments'>
-    <p>This is some arbitrary text to be displayed in the div.</p>
+    <!-- <p>This is some arbitrary text to be displayed in the div.</p>
 
     <p>{sometext}</p>
 
-    <p>{sometextarray.map((text) => <p>{text}</p>)}</p>
+    <p>{sometextarray.map((text) => <p>{text}</p>)}</p> -->
 
     {commentsData.map((comment) => <p>{JSON.stringify(comment)}</p>)}
   </div>
