@@ -107,6 +107,7 @@ export async function fetchAllIssuesWithComments(owner, token, repo) {
 
     // Update the end cursor with the end cursor from the response.
     endCursor = data.data.repository.issues.pageInfo.endCursor;
+
   }
 
   // Return the issues.

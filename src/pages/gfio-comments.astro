@@ -1,5 +1,6 @@
 ---
 import ShoelaceLayout from '../layouts/ShoelaceLayout.astro';
+import Card from '../components/Card.astro';
 
 import {
   fetchAllIssuesWithComments,
@@ -25,7 +26,7 @@ console.log('loaded commentsData.length=', commentsData.length);
 
 <ShoelaceLayout title='‹new-astro-repo› › WebApp'>
   <h1>Hello gfio!</h1>
-  <div class='alert-toast' hidden>
+  <!-- <div class='alert-toast' hidden>
     <sl-button variant='primary'>Primary</sl-button>
     <sl-button variant='success'>Success</sl-button>
     <sl-button variant='neutral'>Neutral</sl-button>
@@ -61,25 +62,36 @@ console.log('loaded commentsData.length=', commentsData.length);
       <strong>Your account has been deleted</strong><br />
       We're very sorry to see you go!
     </sl-alert>
-  </div>
+  </div> -->
   <div class='gfio-comments'>
-    <!-- <p>This is some arbitrary text to be displayed in the div.</p>
+    {
+      commentsData.map((session) => (
+        <Card
+          title={session.title}
+          body={session.comments.nodes.map((node) => node.body)}
+        />
+      ))
+    }
 
-    <p>{sometext}</p>
+    <!-- body={(session) => session.comments.nodes.map((node) => node.body)} -->
 
-    <p>{sometextarray.map((text) => <p>{text}</p>)}</p> -->
+    <!-- {commentsData.map((comment) => <p>{JSON.stringify(comment)}</p>)} -->
 
-    {commentsData.map((comment) => <p>{JSON.stringify(comment)}</p>)}
+    <!-- {
+      commentsData.map((comment) => (
+        <Card title={comment.title} body='Body comes here' />
+      ))
+    } -->
   </div>
 </ShoelaceLayout>
 
 <script>
-  const container = document.querySelector('.alert-toast');
+  // const container = document.querySelector('.alert-toast');
 
-  ['primary', 'success', 'neutral', 'warning', 'danger'].map((variant) => {
-    const button = container?.querySelector(`sl-button[variant="${variant}"]`);
-    const alert = container?.querySelector(`sl-alert[variant="${variant}"]`);
+  // ['primary', 'success', 'neutral', 'warning', 'danger'].map((variant) => {
+  //   const button = container?.querySelector(`sl-button[variant="${variant}"]`);
+  //   const alert = container?.querySelector(`sl-alert[variant="${variant}"]`);
 
-    button?.addEventListener('click', () => alert?.toast());
-  });
+  //   button?.addEventListener('click', () => alert?.toast());
+  // });
 </script>
