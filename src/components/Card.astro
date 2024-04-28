@@ -1,10 +1,12 @@
 ---
+import Markdown from './Markdown.astro';
+
 interface Props {
   title: string;
-  body: string[];
+  bodies: string[];
 }
 
-const { title, body } = Astro.props;
+const { title, bodies } = Astro.props;
 ---
 
 <li class='link-card'>
@@ -14,10 +16,10 @@ const { title, body } = Astro.props;
   </h2>
   <p>
     {
-      body.map((item, index) => (
+      bodies.map((body, index) => (
         <div key={index}>
-          <p>{item}</p>
-          {index < body.length - 1 && <hr />}
+          <Markdown markdown={body} />
+          {/* {index < bodies.length - 1 && <hr />} */}
         </div>
       ))
     }
