@@ -19,7 +19,7 @@ const { markdown } = Astro.props;
   }
 </style>
 
-// The `marked` function converts the `markdown` string to HTML and the
+<!-- The `marked` function converts the `markdown` string to HTML and the
 `set:html` directive sets the inner HTML of the `div` element to the conversion
-result so that the markdown is rendered as HTML inside the `div` element.
+result so that the markdown is rendered as HTML inside the `div` element. -->
 <div class='marked-down' set:html={marked(markdown)} />
