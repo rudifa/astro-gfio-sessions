@@ -59,27 +59,40 @@ export async function fetchAllIssuesWithComments(owner, token, repo) {
     // Define the GraphQL query. This query fetches the first 100 issues and their comments from the specified repository.
     // If an end cursor is provided, it fetches the issues after the issue at the end cursor.
     const query = `
-            query {
-                repository(owner:"${owner}", name:"${repo}") {
-                    issues(first:100, after:${
-                      endCursor ? `"${endCursor}"` : null
-                    }) {
-                        pageInfo {
-                            endCursor
-                            hasNextPage
-                        }
-                        nodes {
-                            title
-                            comments(first:100) {
-                                nodes {
-                                    body
-                                }
-                            }
-                        }
-                    }
-                }
+      query {
+        repository(owner:"${owner}", name:"${repo}") {
+          issues(first:100, after:${
+            endCursor ? `"${endCursor}"` : null
+          }) {
+            pageInfo {
+              endCursor
+              hasNextPage
             }
-        `;
+            nodes {
+              title
+              author {
+                avatarUrl
+                login
+                url
+              }
+              createdAt
+              body
+              comments(first: 100) {
+                nodes {
+                  author {
+                    avatarUrl
+                    login
+                    url
+                  }
+                  createdAt
+                  body
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
 
     // Send a POST request to the GitHub GraphQL API with the query.
     const response = await fetch("https://api.github.com/graphql", {
