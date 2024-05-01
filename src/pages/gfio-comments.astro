@@ -32,7 +32,10 @@ console.log('fetched commentsData: length=', commentsData.length);
       commentsData.map((session) => (
         <Card
           title={session.title}
-          bodies={session.comments.nodes.map((node) => node.body)}
+          description={session.body}
+          author={session.author}
+          createdAt={session.createdAt}
+          comments={session.comments.nodes}
         />
       ))
     }

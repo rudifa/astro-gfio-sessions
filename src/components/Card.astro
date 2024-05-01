@@ -3,23 +3,37 @@ import Markdown from './Markdown.astro';
 
 interface Props {
   title: string;
-  bodies: string[];
+  author: {
+    login: string;
+    url: string;
+  };
+  createdAt: string;
+  description: string;
+  comments: {
+    author: {
+      login: string;
+      url: string;
+    };
+    createdAt: string;
+    body: string;
+  }[];
 }
 
-const { title, bodies } = Astro.props;
+const { title, author, createdAt, description, comments } = Astro.props;
 ---
 
 <li class='link-card'>
-  <h2>
+  <h1>
     {title}
     <span>&rarr;</span>
-  </h2>
+  </h1>
+  <span><a href={author.url}>{author.login}</a> | {createdAt}</span>
+  <Markdown markdown={description ?? ""} />
   <p>
     {
-      bodies.map((body, index) => (
-        <div key={index}>
-          <Markdown markdown={body} />
-        </div>
+      comments.map((comment) => (
+        <span><a href={comment.author.url}>{comment.author.login}</a> | {comment.createdAt}</span>
+        <Markdown markdown={comment.body} />
       ))
     }
   </p>
