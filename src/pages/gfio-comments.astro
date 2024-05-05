@@ -3,7 +3,8 @@ import ShoelaceLayout from '../layouts/ShoelaceLayout.astro';
 import Card from '../components/Card.astro';
 
 import {
-  fetchAllIssuesWithComments,
+  // fetchAllIssuesWithComments,
+  fetchAllIssues,
   getGithubAccessToken,
 } from '../util/fetchgfiocomments.js';
 
@@ -15,7 +16,7 @@ let commentsData;
 
 // Define an async function to fetch the comments data
 async function fetchComments() {
-  commentsData = await fetchAllIssuesWithComments(owner, token, repo);
+  commentsData = await fetchAllIssues(owner, token, repo);
   commentsData.reverse();
 }
 
