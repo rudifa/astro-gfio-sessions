@@ -48,6 +48,24 @@ export function getGithubAccessToken() {
  * @returns
  */
 export async function fetchAllIssuesWithComments(owner, token, repo) {
+  const allIssues = await fetchAllIssues(owner, token, repo);
+  const issuesWithComments = allIssues.filter(
+    (issue) => issue.comments.nodes.length > 0,
+  );
+  return issuesWithComments;
+}
+
+/**
+ * getGithubRepoData - get the repository data from GitHub
+ *
+ * This function fetches all issues and their comments from a GitHub repository using the GitHub GraphQL API.
+ *
+ * @param {*} owner
+ * @param {*} token
+ * @param {*} repo
+ * @returns
+ */
+export async function fetchAllIssues(owner, token, repo) {
   // Initialize an array to store the issues.
   let issues = [];
   // Initialize a variable to store the end cursor for pagination.
@@ -61,9 +79,7 @@ export async function fetchAllIssuesWithComments(owner, token, repo) {
     const query = `
       query {
         repository(owner:"${owner}", name:"${repo}") {
-          issues(first:100, after:${
-            endCursor ? `"${endCursor}"` : null
-          }) {
+          issues(first:100, after:${endCursor ? `"${endCursor}"` : null}) {
             pageInfo {
               endCursor
               hasNextPage
@@ -106,12 +122,9 @@ export async function fetchAllIssuesWithComments(owner, token, repo) {
 
     // Parse the JSON response.
     const data = await response.json();
-    // Filter out issues with no comments.
-    const issuesWithComments = data.data.repository.issues.nodes.filter(
-      (issue) => issue.comments.nodes.length > 0,
-    );
-    // Add the issues with comments to the issues array.
-    issues = issues.concat(issuesWithComments);
+
+    // Add all issues to the issues array, regardless of whether they have comments or not.
+    issues = issues.concat(data.data.repository.issues.nodes);
 
     // If there are no more pages, break the loop.
     if (!data.data.repository.issues.pageInfo.hasNextPage) {
@@ -120,7 +133,6 @@ export async function fetchAllIssuesWithComments(owner, token, repo) {
 
     // Update the end cursor with the end cursor from the response.
     endCursor = data.data.repository.issues.pageInfo.endCursor;
-
   }
 
   // Return the issues.
