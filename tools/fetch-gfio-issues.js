@@ -6,10 +6,15 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 const argv = yargs(hideBin(process.argv))
-  .usage('This script fetches issues from the gfio sessions github repo, in JSON format')
+  .usage('This script fetches issues from the gfio sessions github repo and prints them to stdout, in JSON format.')
   .option('c', {
     alias: 'commented',
     description: 'Fetch only commented issues',
+    type: 'boolean',
+  })
+  .option('r', {
+    alias: 'reversed',
+    description: 'Reverse the order of issues',
     type: 'boolean',
   })
   .help('h')
@@ -41,6 +46,10 @@ if (argv.commented) {
   issues = await fetchAllIssuesWithComments(owner, token, repo);
 } else {
   issues = await fetchAllIssues(owner, token, repo);
+}
+
+if (argv.reversed) {
+  issues.reverse();
 }
 
 // Log the issues to the console
