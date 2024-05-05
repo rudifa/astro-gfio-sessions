@@ -28,12 +28,17 @@ const { title, author, createdAt, description, comments } = Astro.props;
     <span>&rarr;</span>
   </h1>
   <span><a href={author.url}>{author.login}</a> | {createdAt}</span>
-  <Markdown markdown={description ?? ""} />
+  <Markdown markdown={description ?? ''} />
   <p>
     {
       comments.map((comment) => (
-        <span><a href={comment.author.url}>{comment.author.login}</a> | {comment.createdAt}</span>
-        <Markdown markdown={comment.body} />
+        <div>
+          <span>
+            <a href={comment.author.url}>{comment.author.login}</a> |{' '}
+            {comment.createdAt}
+          </span>
+          <Markdown markdown={comment.body} />
+        </div>
       ))
     }
   </p>
