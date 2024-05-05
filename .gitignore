@@ -23,3 +23,6 @@ pnpm-debug.log*
 # Environment variables
 .env
 .env.production
+
+# Local data
+data/
