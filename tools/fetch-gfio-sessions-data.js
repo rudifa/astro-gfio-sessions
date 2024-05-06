@@ -17,6 +17,11 @@ const argv = yargs(hideBin(process.argv))
     description: 'Reverse the order of issues',
     type: 'boolean',
   })
+  .option('o', {
+    alias: 'output',
+    description: 'Define output file',
+    type: 'string',
+  })
   .help('h')
   .alias('h', 'help')
   .demandCommand(0, 0) // No positional arguments should be provided.
@@ -52,9 +57,21 @@ if (argv.reversed) {
   issues.reverse();
 }
 
-// Log the issues to the console
+import { writeFile } from 'fs/promises';
+
 const issuesJSON = JSON.stringify(issues, null, 2);
-console.log(issuesJSON);
+
+if (argv.output) {
+  try {
+    await writeFile(argv.output, issuesJSON);
+    console.log(`Successfully wrote to ${argv.output}`);
+  } catch (error) {
+    console.error(`Failed to write to ${argv.output}: ${error}`);
+  }
+} else {
+  console.log(issuesJSON);
+}
+
 console.error(
   `${issues.length} issues fetched from gfio sessions repo (${issuesJSON.length}) bytes`,
 );
