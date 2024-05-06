@@ -2,18 +2,20 @@
 import { marked } from 'marked';
 
 interface Props {
+  author: {
+    login: string;
+    url: string;
+  };
+  createdAt: string;
   markdown: string;
 }
 
-const { markdown } = Astro.props;
-
-// console.log(marked(markdown));
+const { author, createdAt, markdown } = Astro.props;
 ---
 
 <style>
   .marked-down {
     padding: 1rem;
-    margin: 2px 0;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
   }
@@ -22,4 +24,12 @@ const { markdown } = Astro.props;
 <!-- The `marked` function converts the `markdown` string to HTML and the
 `set:html` directive sets the inner HTML of the `div` element to the conversion
 result so that the markdown is rendered as HTML inside the `div` element. -->
-<div class='marked-down' set:html={marked(markdown)} />
+
+<div class='marked-down'>
+  <div set:html={marked(markdown)} />
+  <span
+    ><a href={author.url}>{author.login}</a> | {
+      new Date(createdAt).toISOString().split('T')[0].replace(/-/g, '.')
+    }</span
+  >
+</div>
