@@ -138,3 +138,15 @@ export async function fetchAllIssues(owner, token, repo) {
   // Return the issues.
   return issues;
 }
+
+/**
+ * This function gets the issue data from a local file
+ *
+ * @param {*} filepath
+ */
+import { readFile } from "fs/promises";
+
+export async function getAllIssues(filepath) {
+  const data = await readFile(filepath, 'utf8');
+  return data;
+}

@@ -1,35 +1,16 @@
 ---
 import ShoelaceLayout from '../layouts/ShoelaceLayout.astro';
 import SessionCard from '../components/SessionCard.astro';
+import commentsData from '../data/allSessionIssues.json';
 
-import {
-  // fetchAllIssuesWithComments,
-  fetchAllIssues,
-  getGithubAccessToken,
-} from '../util/fetchgfiocomments.js';
-
-const owner = 'gongfudev';
-const repo = 'sessions';
-const token = getGithubAccessToken();
-
-let commentsData;
-
-// Define an async function to fetch the comments data
-async function fetchComments() {
-  commentsData = await fetchAllIssues(owner, token, repo);
-  commentsData.reverse();
-}
-
-// Call the function
-await fetchComments();
-console.log('fetched commentsData: length=', commentsData.length);
+const reversedCommentsData = [...commentsData].reverse();
 ---
 
 <ShoelaceLayout title='gfio-sessions'>
   <div class='gfio-sessions'>
     <h1>Gōng-fu DEV Weekly · Hack Sessions</h1>
     {
-      commentsData.map((session) => (
+      reversedCommentsData.map((session) => (
         <SessionCard
           title={session.title}
           body={session.body}
