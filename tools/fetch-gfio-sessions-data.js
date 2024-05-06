@@ -38,12 +38,17 @@ if (argv.commented) {
 // calling util/fetchgfiocomments.js functions
 
 // Import functionsfrom the fetchgfiocomments module
-import { fetchAllIssues, fetchAllIssuesWithComments, getGithubAccessToken } from "../src/util/fetchgfiocomments.js";
+import {
+  fetchAllIssues,
+  fetchAllIssuesWithComments,
+  getGithubAccessToken,
+  getGithubAccessTokenFromDotEnv,
+} from "../src/util/fetchgfiocomments.js";
 
 // Define the owner, token, and repo variables
 const owner = "gongfudev";
 const repo = "sessions";
-const token = getGithubAccessToken();
+const token = getGithubAccessTokenFromDotEnv();
 
 var issues = [];
 

@@ -1,4 +1,5 @@
 /* global fetch */
+/* global console */
 
 import fs from "fs";
 import os from "os";
@@ -35,6 +36,22 @@ export function getGithubAccessToken() {
 
   // If no GitHub access token is found, return null.
   return null;
+}
+
+
+import { readFileSync } from 'fs';
+import { exit } from 'process';
+
+export function getGithubAccessTokenFromDotEnv() {
+  let data;
+  try {
+    data = readFileSync('.env', 'utf8');
+  } catch (error) {
+    console.error(`Failed to read .env file: ${error}`);
+    exit(1);
+  }
+  const token = data.split('\n')[0];
+  return token;
 }
 
 /**
