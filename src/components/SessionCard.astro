@@ -1,5 +1,5 @@
 ---
-import Markdown from './Markdown.astro';
+import MarkdownCard from './MarkdownCard.astro';
 
 interface Props {
   title: string;
@@ -8,7 +8,7 @@ interface Props {
     url: string;
   };
   createdAt: string;
-  description: string;
+  body: string;
   comments: {
     author: {
       login: string;
@@ -19,32 +19,29 @@ interface Props {
   }[];
 }
 
-const { title, author, createdAt, description, comments } = Astro.props;
+const { title, author, createdAt, body, comments } = Astro.props;
 ---
 
-<li class='link-card'>
+<li class='session-card'>
   <h1>
     {title}
     <span>&rarr;</span>
   </h1>
-  <span><a href={author.url}>{author.login}</a> | {createdAt}</span>
-  <Markdown markdown={description ?? ''} />
+  <MarkdownCard author={author} createdAt={createdAt} markdown={body ?? ''} />
   <p>
     {
       comments.map((comment) => (
-        <div>
-          <span>
-            <a href={comment.author.url}>{comment.author.login}</a> |{' '}
-            {comment.createdAt}
-          </span>
-          <Markdown markdown={comment.body} />
-        </div>
+        <MarkdownCard
+          author={comment.author}
+          createdAt={comment.createdAt}
+          markdown={comment.body}
+        />
       ))
     }
   </p>
 </li>
 <style>
-  .link-card {
+  .session-card {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -52,12 +49,13 @@ const { title, author, createdAt, description, comments } = Astro.props;
     margin: 5px;
     background-image: none;
     background-size: 400%;
-    border-radius: 7px;
+    border: 3px solid #ccc;
+    border-radius: 0.5rem;
     background-position: 100%;
     transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   }
-  .link-card > a {
+  .session-card > a {
     width: 100%;
     text-decoration: none;
     line-height: 1.4;
@@ -76,11 +74,11 @@ const { title, author, createdAt, description, comments } = Astro.props;
     margin-bottom: 0;
     padding: 0 2px 5px 2px;
   }
-  .link-card:is(:hover, :focus-within) {
+  .session-card:is(:hover, :focus-within) {
     background-position: 0;
     background-image: var(--accent-gradient);
   }
-  .link-card:is(:hover, :focus-within) h2 {
+  .session-card:is(:hover, :focus-within) h2 {
     color: rgb(var(--accent-light));
     color: lightcoral;
   }
