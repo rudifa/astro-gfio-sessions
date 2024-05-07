@@ -1,7 +1,7 @@
 {
-  "name": "@gongfuio/‹new-astro-repo›",
-  "description": "Starter project with Astro, Shoelace and Lit",
-  "author": "Gōng-fu I/O (https://github.com/gongfuio)",
+  "name": "astro-gfio-sessions-comments",
+  "description": "A workshop project with Astro, Shoelace and Lit",
+  "author": "Rudi Farkas (https://github.com/rudifa)",
   "license": "Apache-2.0",
   "type": "module",
   "version": "1.0.0",
@@ -36,12 +36,12 @@
   "publishConfig": {
     "access": "restricted"
   },
-  "homepage": "https://github.com/gongfuio/‹new-astro-repo›#readme",
+  "homepage": "https://github.com/rudifa/astro-gfio-sessions-comments#readme",
   "bugs": {
-    "url": "https://github.com/gongfuio/‹new-astro-repo›/issues"
+    "url": "https://github.com/rudifa/astro-gfio-sessions-comments/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh@github.com:gongfuio/‹new-astro-repo›.git"
+    "url": "https://github.com/rudifa/astro-gfio-sessions-comments.git"
   }
 }
