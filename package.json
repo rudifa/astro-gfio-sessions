@@ -38,9 +38,6 @@
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.6.1"
   },
-  "publishConfig": {
-    "access": "restricted"
-  },
   "homepage": "https://github.com/rudifa/astro-gfio-sessions#readme",
   "bugs": {
     "url": "https://github.com/rudifa/astro-gfio-sessions/issues"
