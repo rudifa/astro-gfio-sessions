@@ -1,4 +1,20 @@
-# ‹new-astro-repo›
+# astro-gfio-sessions-comments
+
+> A workshop project with Astro, Shoelace and Lit
+
+## Objectives
+
+| _task_ | _status_ |
+| --- | --- |
+| Develop scripts that fetch the [gongfu dev sessions historical data](https://github.com/gongfudev/sessions/issues) | done |
+| Create Astro components that display the fetched data | done |
+| Develop scripts and components for creation and publishing future gongfu dev sessions data | - |
+| Publish this project on [netlify](https://astro-gfio-sessions-comments.netlify.app/) | - |
+| Transfer scripts and components to the [gongfu dev website](https://github.com/gongfudev/website) project| - |
+
+## Project history
+
+> This project was created from [‹new-astro-repo›](https://github.com/gongfudev/new-astro-repo) as template
 
 Starter project with Astro, Shoelace and Lit.
 
