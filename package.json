@@ -1,7 +1,7 @@
 {
-  "name": "@gongfuio/‹new-astro-repo›",
-  "description": "Starter project with Astro, Shoelace and Lit",
-  "author": "Gōng-fu I/O (https://github.com/gongfuio)",
+  "name": "astro-gfio-sessions",
+  "description": "A workshop project with Astro, Shoelace and Lit",
+  "author": "Rudi Farkas (https://github.com/rudifa)",
   "license": "Apache-2.0",
   "type": "module",
   "version": "1.0.0",
@@ -13,35 +13,40 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "fetch": "node ./scripts/fetch-gfio-sessions-data.js --save"
   },
   "dependencies": {
     "@astrojs/vercel": "^6.1.3",
     "@shoelace-style/shoelace": "^2.12.0",
-    "astro": "^4.1.1",
+    "astro": "^4.7.1",
     "lit": "^3.1.1",
     "marked": "^12.0.2",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^6.18.1",
+    "@typescript-eslint/parser": "^7.8.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-astro": "^0.31.0",
     "husky": "^8.0.3",
     "prettier": "^3.1.1",
     "prettier-plugin-astro": "^0.12.3",
+    "rollup": "^4.17.2",
     "vite-plugin-static-copy": "^1.0.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
   },
   "publishConfig": {
     "access": "restricted"
   },
-  "homepage": "https://github.com/gongfuio/‹new-astro-repo›#readme",
+  "homepage": "https://github.com/rudifa/astro-gfio-sessions#readme",
   "bugs": {
-    "url": "https://github.com/gongfuio/‹new-astro-repo›/issues"
+    "url": "https://github.com/rudifa/astro-gfio-sessions/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh@github.com:gongfuio/‹new-astro-repo›.git"
+    "url": "https://github.com/rudifa/astro-gfio-sessions.git"
   }
 }

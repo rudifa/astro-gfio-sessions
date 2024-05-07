@@ -1,4 +1,9 @@
 /* global fetch */
+/* global console */
+
+/**
+ * This file contains utility functions for fetching data from GitHub.
+ */
 
 import fs from "fs";
 import os from "os";
@@ -35,6 +40,36 @@ export function getGithubAccessToken() {
 
   // If no GitHub access token is found, return null.
   return null;
+}
+
+
+import { readFileSync } from 'fs';
+import { exit } from 'process';
+
+/**
+ * This function reads the GitHub access token from the .env file in format
+ * `GITHUB_ACCESS_token=ghp_...`
+ *
+ * @returns {string} the token string
+ */
+export function getGithubAccessTokenFromDotEnv() {
+  let data;
+  try {
+    data = readFileSync('.env', 'utf8');
+  } catch (error) {
+    console.error(`Failed to read .env file: ${error}`);
+    process.exit(1);
+  }
+
+  const lines = data.split('\n');
+  for (let line of lines) {
+    if (line.startsWith('GITHUB_ACCESS_TOKEN=')) {
+      return line.split('=')[1];
+    }
+  }
+
+  console.error('Failed to find GITHUB_ACCESS_TOKEN in .env file');
+  process.exit(1);
 }
 
 /**
@@ -137,4 +172,16 @@ export async function fetchAllIssues(owner, token, repo) {
 
   // Return the issues.
   return issues;
+}
+
+/**
+ * This function gets the issue data from a local file
+ *
+ * @param {*} filepath
+ */
+import { readFile } from "fs/promises";
+
+export async function getAllIssues(filepath) {
+  const data = await readFile(filepath, 'utf8');
+  return data;
 }
