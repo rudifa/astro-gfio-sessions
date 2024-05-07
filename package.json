@@ -34,6 +34,9 @@
     "prettier-plugin-astro": "^0.12.3",
     "vite-plugin-static-copy": "^1.0.0"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
+  },
   "publishConfig": {
     "access": "restricted"
   },
