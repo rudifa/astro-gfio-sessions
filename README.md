@@ -8,8 +8,8 @@
 | --- | --- |
 | Develop scripts that fetch the [gongfu dev sessions historical data](https://github.com/gongfudev/sessions/issues) | done |
 | Create Astro components that display the fetched data | done |
+| Publish this project on [netlify](https://astro-gfio-sessions.netlify.app/) | done |
 | Develop scripts and components for creation and publishing future gongfu dev sessions data | - |
-| Publish this project on [netlify](https://astro-gfio-sessions.netlify.app/) | - |
 | Transfer scripts and components to the [gongfu dev website](https://github.com/gongfudev/website) project| - |
 
 ## 🚀 Quick start
@@ -38,6 +38,10 @@ NOTE: make sure that you have a local `.env` file containing a valid github acce
 ```sh
   GITHUB_ACCESS_TOKEN=ghp_...
 ```
+
+<h2>Published!</h2>
+
+Now (07.05.2024) the project is published on [netlify](https://astro-gfio-sessions.netlify.app/).
 
 ## Project history
 

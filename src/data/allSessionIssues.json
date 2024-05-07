@@ -8687,6 +8687,15 @@
           },
           "createdAt": "2024-05-06T15:08:31Z",
           "body": "The [prototype project](https://github.com/rudifa/astro-gfio-sessions-comments) fetches the Hack Session data via [github graphql](https://api.github.com/graphql) and uses the [marked.js](https://marked.js.org/) package to convert the markdown data fragments to HTML in Astro components."
+        },
+        {
+          "author": {
+            "avatarUrl": "https://avatars.githubusercontent.com/u/172404?v=4",
+            "login": "rudifa",
+            "url": "https://github.com/rudifa"
+          },
+          "createdAt": "2024-05-07T19:30:32Z",
+          "body": "Renamed the prototype project to [astro-gfio-sessions](https://github.com/rudifa/astro-gfio-sessions-comments.git) and published it on [netlify](https://astro-gfio-sessions.netlify.app/)."
         }
       ]
     }
