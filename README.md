@@ -1,4 +1,4 @@
-# astro-gfio-sessions-comments
+# astro-gfio-sessions
 
 > A workshop project with Astro, Shoelace and Lit
 
@@ -9,8 +9,35 @@
 | Develop scripts that fetch the [gongfu dev sessions historical data](https://github.com/gongfudev/sessions/issues) | done |
 | Create Astro components that display the fetched data | done |
 | Develop scripts and components for creation and publishing future gongfu dev sessions data | - |
-| Publish this project on [netlify](https://astro-gfio-sessions-comments.netlify.app/) | - |
+| Publish this project on [netlify](https://astro-gfio-sessions.netlify.app/) | - |
 | Transfer scripts and components to the [gongfu dev website](https://github.com/gongfudev/website) project| - |
+
+## 🚀 Quick start
+
+To run the project locally, follow these steps:
+
+```sh
+  % npm run fetch # fetch the gongfu dev sessions data and save it to src/data/
+
+  % npm run dev
+
+  % npm run build
+  % npm run preview
+```
+
+Open the page [localhost:4321](http://localhost:4321/)
+
+For a quick look at fetched data you can run the fetch script as
+
+```sh
+  % scripts/fetch-gfio-sessions-data.js
+```
+
+NOTE: make sure that you have a local `.env` file containing a valid github access token (otherwise your fetch operation will be rate limited)
+
+```sh
+  GITHUB_ACCESS_TOKEN=ghp_...
+```
 
 ## Project history
 

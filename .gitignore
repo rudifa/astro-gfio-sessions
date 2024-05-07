@@ -25,4 +25,4 @@ pnpm-debug.log*
 .env.production
 
 # Local data
-tools/data/
+tmp/

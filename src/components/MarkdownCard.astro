@@ -13,18 +13,9 @@ interface Props {
 const { author, createdAt, markdown } = Astro.props;
 ---
 
-<style>
-  .marked-down {
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-  }
-</style>
-
 <!-- The `marked` function converts the `markdown` string to HTML and the
 `set:html` directive sets the inner HTML of the `div` element to the conversion
 result so that the markdown is rendered as HTML inside the `div` element. -->
-
 <div class='marked-down'>
   <div set:html={marked(markdown)} />
   <span
@@ -33,3 +24,13 @@ result so that the markdown is rendered as HTML inside the `div` element. -->
     }</span
   >
 </div>
+
+<style>
+  .marked-down {
+    padding: 1rem;
+    margin: 0.2rem 0;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background-color: white;
+  }
+</style>
