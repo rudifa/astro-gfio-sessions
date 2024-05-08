@@ -16,12 +16,15 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 const argv = yargs(hideBin(process.argv))
-  .usage(usage
-    ,
-  )
+  .usage(usage)
   .option("c", {
     alias: "commented",
     description: "Fetch only commented issues",
+    type: "boolean",
+  })
+  .option("l", {
+    alias: "log-rate",
+    description: "Log rate limit data from GitHub API",
     type: "boolean",
   })
   .option("r", {
@@ -60,9 +63,9 @@ import {
 var issues = [];
 
 if (argv.commented) {
-  issues = await fetchAllIssuesWithComments(owner, token, repo);
+  issues = await fetchAllIssuesWithComments(owner, token, repo, argv.logRate);
 } else {
-  issues = await fetchAllIssues(owner, token, repo);
+  issues = await fetchAllIssues(owner, token, repo, argv.logRate);
 }
 
 if (argv.reversed) {

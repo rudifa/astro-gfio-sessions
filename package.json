@@ -8,10 +8,10 @@
   "scripts": {
     "format": "prettier \"src/**/*.{astro,js,html,css}\" --write",
     "lint": "eslint src --ext .js,.astro",
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro preview --host",
     "astro": "astro",
     "prepare": "husky install",
     "fetch": "node ./scripts/fetch-gfio-sessions-data.js --save"

@@ -10,7 +10,7 @@ import os from "os";
 import path from "path";
 
 /**
- * getGithubAccessToken - get the token string starting with ghp_ from ~/.netrc
+ * getGithubAccessToken gets the token string starting with ghp_ from ~/.netrc
  *
  * @returns {string} the token string
  */
@@ -42,48 +42,46 @@ export function getGithubAccessToken() {
   return null;
 }
 
-
-import { readFileSync } from 'fs';
-import { exit } from 'process';
+import { readFileSync } from "fs";
+import { exit } from "process";
 
 /**
- * This function reads the GitHub access token from the .env file in format
- * `GITHUB_ACCESS_token=ghp_...`
+ * getGithubAccessTokenFromDotEnv reads the GitHub access token from the .env file in format
+ *
+ * `GITHUB_ACCESS_TOKEN=ghp_...`
  *
  * @returns {string} the token string
  */
 export function getGithubAccessTokenFromDotEnv() {
   let data;
   try {
-    data = readFileSync('.env', 'utf8');
+    data = readFileSync(".env", "utf8");
   } catch (error) {
     console.error(`Failed to read .env file: ${error}`);
     process.exit(1);
   }
 
-  const lines = data.split('\n');
+  const lines = data.split("\n");
   for (let line of lines) {
-    if (line.startsWith('GITHUB_ACCESS_TOKEN=')) {
-      return line.split('=')[1];
+    if (line.startsWith("GITHUB_ACCESS_TOKEN=")) {
+      return line.split("=")[1];
     }
   }
 
-  console.error('Failed to find GITHUB_ACCESS_TOKEN in .env file');
+  console.error("Failed to find GITHUB_ACCESS_TOKEN in .env file");
   process.exit(1);
 }
 
 /**
- * getGithubRepoData - get the repository data from GitHub
- *
- * This function fetches all issues and their comments from a GitHub repository using the GitHub GraphQL API.
+ * fetchAllIssuesWithComments fetches all issues and their comments from a GitHub repository using the GitHub GraphQL API.
  *
  * @param {*} owner
  * @param {*} token
  * @param {*} repo
- * @returns
+ * @returns {array} issuesWithComments
  */
-export async function fetchAllIssuesWithComments(owner, token, repo) {
-  const allIssues = await fetchAllIssues(owner, token, repo);
+export async function fetchAllIssuesWithComments(owner, token, repo, logRateData = false) {
+  const allIssues = await fetchAllIssues(owner, token, repo, logRateData);
   const issuesWithComments = allIssues.filter(
     (issue) => issue.comments.nodes.length > 0,
   );
@@ -91,16 +89,15 @@ export async function fetchAllIssuesWithComments(owner, token, repo) {
 }
 
 /**
- * getGithubRepoData - get the repository data from GitHub
- *
- * This function fetches all issues and their comments from a GitHub repository using the GitHub GraphQL API.
+ * fetchAllIssues fetches all issues and their comments from a GitHub repository using the GitHub GraphQL API.
  *
  * @param {*} owner
  * @param {*} token
  * @param {*} repo
- * @returns
+ * @param {boolean} logRateData
+ * @returns {array} issues
  */
-export async function fetchAllIssues(owner, token, repo) {
+export async function fetchAllIssues(owner, token, repo, logRateData = false) {
   // Initialize an array to store the issues.
   let issues = [];
   // Initialize a variable to store the end cursor for pagination.
@@ -163,6 +160,9 @@ export async function fetchAllIssues(owner, token, repo) {
 
     // If there are no more pages, break the loop.
     if (!data.data.repository.issues.pageInfo.hasNextPage) {
+      if (logRateData) {
+        logRateLimits(response);
+      }
       break;
     }
 
@@ -175,13 +175,37 @@ export async function fetchAllIssues(owner, token, repo) {
 }
 
 /**
- * This function gets the issue data from a local file
+ * logRateLimits logs the rate limit data from a fetched response to stderr
  *
- * @param {*} filepath
+ * @param {*} response
  */
+function logRateLimits(response) {
+  console.error("Rate limit:", response.headers.get("x-ratelimit-limit"));
+  console.error("Rate limit used:", response.headers.get("x-ratelimit-used"));
+  console.error(
+    "Rate limit remaining:",
+    response.headers.get("x-ratelimit-remaining"),
+  );
+
+  console.error(
+    "Rate limit resource:",
+    response.headers.get("x-ratelimit-resource"),
+  );
+
+  const epochSeconds = response.headers.get("x-ratelimit-reset");
+  const date = new Date(epochSeconds * 1000);
+  console.error("Rate limit reset:", date.toLocaleString());
+}
+
 import { readFile } from "fs/promises";
 
+/**
+ * getAllIssues gets the issue data from a local file
+ *
+ * @param {*} filepath
+ * @returns {string} file content
+ */
 export async function getAllIssues(filepath) {
-  const data = await readFile(filepath, 'utf8');
+  const data = await readFile(filepath, "utf8");
   return data;
 }
