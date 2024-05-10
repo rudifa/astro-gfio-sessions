@@ -1,15 +1,23 @@
 ---
+
 ---
-<sl-dropdown id="theme-selector" placement="bottom-end" distance="3">
-  <sl-button slot="trigger" size="small" variant="text" caret title="Press \ to toggle">
-    <sl-icon class="only-light" name="sun-fill"></sl-icon>
-    <sl-icon class="only-dark" name="moon-fill"></sl-icon>
+
+<sl-dropdown id='theme-selector' placement='bottom-end' distance='3'>
+  <sl-button
+    slot='trigger'
+    size='small'
+    variant='text'
+    caret
+    title='Press \ to toggle'
+  >
+    <sl-icon class='only-light' name='sun-fill'></sl-icon>
+    <sl-icon class='only-dark' name='moon-fill'></sl-icon>
   </sl-button>
   <sl-menu>
-    <sl-menu-item type="checkbox" value="light">Light</sl-menu-item>
-    <sl-menu-item type="checkbox" value="dark">Dark</sl-menu-item>
+    <sl-menu-item type='checkbox' value='light'>Light</sl-menu-item>
+    <sl-menu-item type='checkbox' value='dark'>Dark</sl-menu-item>
     <sl-divider></sl-divider>
-    <sl-menu-item type="checkbox" value="auto">System</sl-menu-item>
+    <sl-menu-item type='checkbox' value='auto'>System</sl-menu-item>
   </sl-menu>
 </sl-dropdown>
 
@@ -21,6 +29,7 @@
 
   #theme-selector sl-button {
     transition: 250ms scale ease;
+    margin-bottom: 3px;
   }
 
   #theme-selector sl-button::part(base) {
@@ -71,33 +80,41 @@
   function updateSelection() {
     const menu = document.querySelector('#theme-selector sl-menu');
     if (!menu) return;
-    [...menu.querySelectorAll('sl-menu-item')].map(item => (item.checked = item.getAttribute('value') === theme));
+    [...menu.querySelectorAll('sl-menu-item')].map(
+      (item) => (item.checked = item.getAttribute('value') === theme)
+    );
   }
 
   let theme = getTheme();
 
   // Selection is not preserved when changing page, so update when opening dropdown
-  document.addEventListener('sl-show', event => {
+  document.addEventListener('sl-show', (event) => {
     const themeSelector = event.target.closest('#theme-selector');
     if (!themeSelector) return;
     updateSelection();
   });
 
   // Listen for selections
-  document.addEventListener('sl-select', event => {
+  document.addEventListener('sl-select', (event) => {
     const menu = event.target.closest('#theme-selector sl-menu');
     if (!menu) return;
     setTheme(event.detail.item.value);
   });
 
   // Update the theme when the preference changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTheme(theme));
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', () => setTheme(theme));
 
   // Toggle with backslash
-  document.addEventListener('keydown', event => {
+  document.addEventListener('keydown', (event) => {
     if (
       event.key === '\\' &&
-      !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
+      !event
+        .composedPath()
+        .some((el) =>
+          ['input', 'textarea'].includes(el?.tagName?.toLowerCase())
+        )
     ) {
       event.preventDefault();
       setTheme(isDark() ? 'light' : 'dark');
