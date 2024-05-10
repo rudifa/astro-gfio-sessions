@@ -80,7 +80,12 @@ export function getGithubAccessTokenFromDotEnv() {
  * @param {*} repo
  * @returns {array} issuesWithComments
  */
-export async function fetchAllIssuesWithComments(owner, token, repo, logRateData = false) {
+export async function fetchAllIssuesWithComments(
+  owner,
+  token,
+  repo,
+  logRateData = false,
+) {
   const allIssues = await fetchAllIssues(owner, token, repo, logRateData);
   const issuesWithComments = allIssues.filter(
     (issue) => issue.comments.nodes.length > 0,
@@ -152,6 +157,11 @@ export async function fetchAllIssues(owner, token, repo, logRateData = false) {
       body: JSON.stringify({ query }),
     });
 
+    // Check if the response is successful.
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     // Parse the JSON response.
     const data = await response.json();
 
@@ -164,6 +174,12 @@ export async function fetchAllIssues(owner, token, repo, logRateData = false) {
         logRateLimits(response);
       }
       break;
+    }
+
+    // Check if the response contains errors.
+    if (data.errors) {
+      console.error(data.errors);
+      throw new Error("GraphQL query execution errors");
     }
 
     // Update the end cursor with the end cursor from the response.
