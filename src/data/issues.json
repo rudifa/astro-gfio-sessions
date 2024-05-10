@@ -8708,7 +8708,20 @@
       "url": "https://github.com/olange"
     },
     "createdAt": "2024-05-01T13:26:17Z",
-    "body": "## 08.05.2024\r\n\r\nWrap-up of our [Gōng-fu I/O Weekly · Hack Session #627 ✼ Remotely ✼](https://www.meetup.com/fr-FR/gōngfuio/events/300499730/) meetup.\r\n\r\n### Projects\r\n\r\n• [Astro › Content Collections](https://docs.astro.build/en/guides/content-collections/) — @olange and @rudifa\r\n• [Flutter](https://flutter.dev) — @andreaskundig and @david-hodgetts\r\n\r\n### See also\r\n\r\n* #626 Previous session\r\n* `TODO` Next session",
+    "body": "## 08.05.2024\r\n\r\nWrap-up of our [Gōng-fu I/O Weekly · Hack Session #627 ✼ Remotely ✼](https://www.meetup.com/fr-FR/gōngfuio/events/300499730/) meetup.\r\n\r\n### Projects\r\n\r\n• [Gōng-fu DEV's new website](https://github.com/gongfudev/website) with [Astro](https://astro.build/) — @olange and @rudifa\r\n• [Flutter](https://flutter.dev) — @andreaskundig and @david-hodgetts\r\n\r\n### See also\r\n\r\n* #626 Previous session\r\n* #628 Next session",
+    "comments": {
+      "nodes": []
+    }
+  },
+  {
+    "title": "Hack Session 628 ✼ Remotely",
+    "author": {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/673088?u=ee2e7d4dcbe39c60ff7a45cf49cc1f09ceafe945&v=4",
+      "login": "olange",
+      "url": "https://github.com/olange"
+    },
+    "createdAt": "2024-05-08T18:47:40Z",
+    "body": "## 15.05.2024\r\n\r\nWrap-up of our [Gōng-fu I/O Weekly · Hack Session #628 ✼ Remotely ✼](https://www.meetup.com/gōngfudev/events/300642395/) meetup.\r\n\r\n### Projects\r\n\r\n• [Astro › Content Collections](https://docs.astro.build/en/guides/content-collections/) — @olange and @rudifa\r\n• [Flutter](https://flutter.dev) — @andreaskundig and @david-hodgetts\r\n\r\n### See also\r\n\r\n* #627 Previous session\r\n* `TODO` Next session",
     "comments": {
       "nodes": []
     }

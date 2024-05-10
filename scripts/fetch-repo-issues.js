@@ -3,11 +3,11 @@
 // -----------------------------
 // Define the configuration data
 
-const usage = "This script fetches issues from the gfio sessions github repo and saves them to a file or prints them to stdout, in JSON format."
+const usage = "This script fetches issues from the specified github repo and saves them to a file or prints them to stdout, in JSON format."
 const owner = "gongfudev";
 const repo = "sessions";
 const token = getGithubAccessTokenFromDotEnv();
-const outfile = "src/data/allSessionIssues.json";
+const outfile = "src/data/issues.json";
 
 // --------------------
 // Handle CLI arguments
@@ -22,15 +22,27 @@ const argv = yargs(hideBin(process.argv))
     description: "Fetch only commented issues",
     type: "boolean",
   })
+  .option("i", {
+    alias: "invert",
+    description: "Invert the order of issues",
+    type: "boolean",
+  })
   .option("l", {
     alias: "log-rate",
     description: "Log rate limit data from GitHub API",
     type: "boolean",
   })
   .option("r", {
-    alias: "reversed",
-    description: "Reverse the order of issues",
-    type: "boolean",
+    alias: "repo",
+    description: "Specify the repo",
+    type: "string",
+    default: `${repo}`,
+  })
+  .option("o", {
+    alias: "owner",
+    description: "Specify the repo owner",
+    type: "string",
+    default: `${owner}`,
   })
   .option("s", {
     alias: "save",
@@ -63,9 +75,14 @@ import {
 var issues = [];
 
 if (argv.commented) {
-  issues = await fetchAllIssuesWithComments(owner, token, repo, argv.logRate);
+  issues = await fetchAllIssuesWithComments(
+    argv.owner,
+    token,
+    argv.repo,
+    argv.logRate,
+  );
 } else {
-  issues = await fetchAllIssues(owner, token, repo, argv.logRate);
+  issues = await fetchAllIssues(argv.owner, token, argv.repo, argv.logRate);
 }
 
 if (argv.reversed) {
@@ -88,5 +105,5 @@ if (argv.save) {
 }
 
 console.error(
-  `${issues.length} issues fetched from gfio sessions repo (${issuesJSON.length}) bytes`,
+  `${issues.length} issues fetched from ${argv.owner} ${argv.repo} repo (${issuesJSON.length}) bytes`,
 );
