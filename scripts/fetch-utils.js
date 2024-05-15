@@ -57,7 +57,9 @@ export function getGithubAccessTokenFromDotEnv() {
   try {
     data = readFileSync(".env", "utf8");
   } catch (error) {
-    console.error(`Failed to read .env file: ${error}`);
+    console.error(
+      `${error}\nYou need a .env file that contains a line 'GITHUB_ACCESS_TOKEN=ghp_...'`,
+    );
     process.exit(1);
   }
 

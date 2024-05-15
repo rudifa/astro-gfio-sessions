@@ -3,10 +3,9 @@
 // -----------------------------
 // Define the configuration data
 
-const usage = "This script fetches issues from the specified github repo and saves them to a file or prints them to stdout, in JSON format."
+const usage = "\nThis script fetches issues from the specified github repo and saves them to a file or prints them to stdout, in JSON format."
 const owner = "gongfudev";
 const repo = "sessions";
-const token = getGithubAccessTokenFromDotEnv();
 const outfile = "src/data/issues.json";
 
 // --------------------
@@ -73,6 +72,7 @@ import {
 
 
 var issues = [];
+const token = getGithubAccessTokenFromDotEnv();
 
 if (argv.commented) {
   issues = await fetchAllIssuesWithComments(
@@ -82,7 +82,12 @@ if (argv.commented) {
     argv.logRate,
   );
 } else {
-  issues = await fetchAllIssues(argv.owner, token, argv.repo, argv.logRate);
+  issues = await fetchAllIssues(
+    argv.owner,
+    token,
+    argv.repo,
+    argv.logRate,
+  );
 }
 
 if (argv.reversed) {
