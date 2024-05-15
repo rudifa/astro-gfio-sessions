@@ -9,6 +9,7 @@
 | Develop scripts that fetch the [gongfu dev sessions historical data](https://github.com/gongfudev/sessions/issues) | done |
 | Create Astro components that display the fetched data | done |
 | Publish this project on [netlify](https://astro-gfio-sessions.netlify.app/) | done |
+| Publish this project on [vercel](https://astro-gfio-sessions.vercel.app/) | done |
 | Develop scripts and components for creation and publishing future gongfu dev sessions data | - |
 | Transfer scripts and components to the [gongfu dev website](https://github.com/gongfudev/website) project| - |
 
