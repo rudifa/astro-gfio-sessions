@@ -53,13 +53,15 @@ import { exit } from "process";
  * @returns {string} the token string
  */
 export function getGithubAccessTokenFromDotEnv() {
+  const envErrorMsg = `Your .env file should contain a line with a valid github access token:\n` +
+  `GITHUB_ACCESS_TOKEN=ghp_...`;
+
   let data;
   try {
     data = readFileSync(".env", "utf8");
   } catch (error) {
-    console.error(
-      `${error}\nYou need a .env file that contains a line 'GITHUB_ACCESS_TOKEN=ghp_...'`,
-    );
+    console.error(`${error}`);
+    console.error(`${envErrorMsg}`);
     process.exit(1);
   }
 
@@ -70,7 +72,7 @@ export function getGithubAccessTokenFromDotEnv() {
     }
   }
 
-  console.error("Failed to find GITHUB_ACCESS_TOKEN in .env file");
+  console.error(`${envErrorMsg}`);
   process.exit(1);
 }
 
